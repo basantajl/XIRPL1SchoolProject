@@ -1,0 +1,434 @@
+MariaDB [(none)]> use cafe
+Database changed
+MariaDB [cafe]> select * from menu;
++---------+-------------+---------+----------------+---------+-------+
+| id_menu | nama_menu   | jenis   | deskripsi      | gambar  | harga |
++---------+-------------+---------+----------------+---------+-------+
+|       1 | soto daging | makanan | asli lamongan  | xxx.jpg | 15000 |
+|       2 | Es Coklat   | minuman | topping bubble | yyy.jpg |  8000 |
++---------+-------------+---------+----------------+---------+-------+
+2 rows in set (0.000 sec)
+
+MariaDB [cafe]> quit
+Bye
+
+user@LAPTOP-7KHJIFHE c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 25
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use mahasiswa
+Database changed
+MariaDB [mahasiswa]> select * from matapelajaran;
++----------+------------------+----+----------+------+
+| kode_mp  | namaMapel        | jp | semester | guru |
++----------+------------------+----+----------+------+
+| BHS123   | Bahasa China     |  2 |        5 | NULL |
+| BHS129   | Bahasa Jawa      |  3 |        5 | NULL |
+| negro123 | HTML,CSS,JS      |  2 |        4 | NULL |
+| TIK333   | Pemograman Dasar |  3 |        5 | NULL |
+| TIK367   | Basis Data       |  3 |        5 | NULL |
+| TIK77    | komjarDas        |  2 |        3 | NULL |
++----------+------------------+----+----------+------+
+6 rows in set (0.012 sec)
+
+MariaDB [mahasiswa]> select * from matapelajaran order by jp asc;
++----------+------------------+----+----------+------+
+| kode_mp  | namaMapel        | jp | semester | guru |
++----------+------------------+----+----------+------+
+| BHS123   | Bahasa China     |  2 |        5 | NULL |
+| negro123 | HTML,CSS,JS      |  2 |        4 | NULL |
+| TIK77    | komjarDas        |  2 |        3 | NULL |
+| BHS129   | Bahasa Jawa      |  3 |        5 | NULL |
+| TIK333   | Pemograman Dasar |  3 |        5 | NULL |
+| TIK367   | Basis Data       |  3 |        5 | NULL |
++----------+------------------+----+----------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [mahasiswa]> quit
+Bye
+
+user@LAPTOP-7KHJIFHE c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 26
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database basanta;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> use basanta;
+Database changed
+MariaDB [basanta]> create table gaji(
+    -> idgaji int(12)not null primary key,
+    -> besaran int(11) not null,
+    -> idjab int(11) not null);
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [basanta]> desc gaji;
++---------+---------+------+-----+---------+-------+
+| Field   | Type    | Null | Key | Default | Extra |
++---------+---------+------+-----+---------+-------+
+| idgaji  | int(12) | NO   | PRI | NULL    |       |
+| besaran | int(11) | NO   |     | NULL    |       |
+| idjab   | int(11) | NO   |     | NULL    |       |
++---------+---------+------+-----+---------+-------+
+3 rows in set (0.014 sec)
+
+MariaDB [basanta]> create table jabatan
+    -> (idjab int(11) not null primary key,
+    -> jabatan varchar(25) not null);
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [basanta]> desc jabatan;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| idjab   | int(11)     | NO   | PRI | NULL    |       |
+| jabatan | varchar(25) | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+2 rows in set (0.003 sec)
+
+MariaDB [basanta]> create table pegawai
+    -> (idpeg int(11) not null primary key,
+    -> nama varchar(50) not null,
+    -> idjab int(11) not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 4
+MariaDB [basanta]> create table pegawai
+    -> (idjab int(11) not null primary key,
+    -> nama varchar(50) not null,
+    -> idjab int(11) not null);
+ERROR 1060 (42S21): Duplicate column name 'idjab'
+MariaDB [basanta]> create table pegawai
+    -> (idpeg int(11) not null primary key,
+    -> nama varchar(50) not null,
+    -> idjab int(11) not null);
+Query OK, 0 rows affected (0.017 sec)
+
+MariaDB [basanta]> desc pegawai;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| idpeg | int(11)     | NO   | PRI | NULL    |       |
+| nama  | varchar(50) | NO   |     | NULL    |       |
+| idjab | int(11)     | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.013 sec)
+
+MariaDB [basanta]> insert into gaji values
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [basanta]> insert into jabatan values
+    -> (1,'manager'),
+    -> (2,'Pegawai'),
+    -> (3,'Supervisor');
+Query OK, 3 rows affected (0.012 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [basanta]> select * from jabatan;
++-------+------------+
+| idjab | jabatan    |
++-------+------------+
+|     1 | manager    |
+|     2 | Pegawai    |
+|     3 | Supervisor |
++-------+------------+
+3 rows in set (0.000 sec)
+
+MariaDB [basanta]> insert into jabatan value
+    -> (4,'staff'),
+    -> (5,'kabag');
+Query OK, 2 rows affected (0.012 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [basanta]> insert into pegawai value
+    -> (1,'Rusdi',1),
+    -> (2,'sena',2),
+    -> (3,'Bagus',1),
+    -> (4,'Anwar',3),
+    -> (5,'Amin',1);
+Query OK, 5 rows affected (0.011 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [basanta]> select *from pegawai;
++-------+-------+-------+
+| idpeg | nama  | idjab |
++-------+-------+-------+
+|     1 | Rusdi |     1 |
+|     2 | sena  |     2 |
+|     3 | Bagus |     1 |
+|     4 | Anwar |     3 |
+|     5 | Amin  |     1 |
++-------+-------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [basanta]> update pegawai set nama = Ani where idjab =2;
+ERROR 1054 (42S22): Unknown column 'Ani' in 'field list'
+MariaDB [basanta]> update pegawai set nama = sena where idjab =2;
+ERROR 1054 (42S22): Unknown column 'sena' in 'field list'
+MariaDB [basanta]> update pegawai set nama = sena where id=2;
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+MariaDB [basanta]> update pegawai set nama ="Ani" where idpeg =2;
+Query OK, 1 row affected (0.039 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [basanta]> update pegawai set nama ="Rudi" where idpeg =1;
+Query OK, 1 row affected (0.012 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [basanta]> select *from pegawai;
++-------+-------+-------+
+| idpeg | nama  | idjab |
++-------+-------+-------+
+|     1 | Rudi  |     1 |
+|     2 | Ani   |     2 |
+|     3 | Bagus |     1 |
+|     4 | Anwar |     3 |
+|     5 | Amin  |     1 |
++-------+-------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [basanta]> insert into gaji value
+    -> (1,'20000000',1)
+    -> (1,'10000000',2)
+    -> (1,'15000000',3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(1,'10000000',2)
+(1,'15000000',3)' at line 3
+MariaDB [basanta]> insert into gaji values
+    -> (1,'20000000',1),
+    -> (1,'10000000',2),
+    -> (1,'15000000',3);
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+MariaDB [basanta]> insert into gaji value
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [basanta]> insert into gaji values
+    -> (1,'20000000',1),
+    -> (2,'10000000',2),
+    -> (3,'15000000',3);
+Query OK, 3 rows affected (0.012 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [basanta]> select * from gaji;
++--------+----------+-------+
+| idgaji | besaran  | idjab |
++--------+----------+-------+
+|      1 | 20000000 |     1 |
+|      2 | 10000000 |     2 |
+|      3 | 15000000 |     3 |
++--------+----------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [basanta]> select * from gaji , jabatan;
++--------+----------+-------+-------+------------+
+| idgaji | besaran  | idjab | idjab | jabatan    |
++--------+----------+-------+-------+------------+
+|      1 | 20000000 |     1 |     1 | manager    |
+|      2 | 10000000 |     2 |     1 | manager    |
+|      3 | 15000000 |     3 |     1 | manager    |
+|      1 | 20000000 |     1 |     2 | Pegawai    |
+|      2 | 10000000 |     2 |     2 | Pegawai    |
+|      3 | 15000000 |     3 |     2 | Pegawai    |
+|      1 | 20000000 |     1 |     3 | Supervisor |
+|      2 | 10000000 |     2 |     3 | Supervisor |
+|      3 | 15000000 |     3 |     3 | Supervisor |
+|      1 | 20000000 |     1 |     4 | staff      |
+|      2 | 10000000 |     2 |     4 | staff      |
+|      3 | 15000000 |     3 |     4 | staff      |
+|      1 | 20000000 |     1 |     5 | kabag      |
+|      2 | 10000000 |     2 |     5 | kabag      |
+|      3 | 15000000 |     3 |     5 | kabag      |
++--------+----------+-------+-------+------------+
+15 rows in set (0.011 sec)
+
+MariaDB [basanta]> select * from pegawai , jabatan;
++-------+-------+-------+-------+------------+
+| idpeg | nama  | idjab | idjab | jabatan    |
++-------+-------+-------+-------+------------+
+|     1 | Rudi  |     1 |     1 | manager    |
+|     2 | Ani   |     2 |     1 | manager    |
+|     3 | Bagus |     1 |     1 | manager    |
+|     4 | Anwar |     3 |     1 | manager    |
+|     5 | Amin  |     1 |     1 | manager    |
+|     1 | Rudi  |     1 |     2 | Pegawai    |
+|     2 | Ani   |     2 |     2 | Pegawai    |
+|     3 | Bagus |     1 |     2 | Pegawai    |
+|     4 | Anwar |     3 |     2 | Pegawai    |
+|     5 | Amin  |     1 |     2 | Pegawai    |
+|     1 | Rudi  |     1 |     3 | Supervisor |
+|     2 | Ani   |     2 |     3 | Supervisor |
+|     3 | Bagus |     1 |     3 | Supervisor |
+|     4 | Anwar |     3 |     3 | Supervisor |
+|     5 | Amin  |     1 |     3 | Supervisor |
+|     1 | Rudi  |     1 |     4 | staff      |
+|     2 | Ani   |     2 |     4 | staff      |
+|     3 | Bagus |     1 |     4 | staff      |
+|     4 | Anwar |     3 |     4 | staff      |
+|     5 | Amin  |     1 |     4 | staff      |
+|     1 | Rudi  |     1 |     5 | kabag      |
+|     2 | Ani   |     2 |     5 | kabag      |
+|     3 | Bagus |     1 |     5 | kabag      |
+|     4 | Anwar |     3 |     5 | kabag      |
+|     5 | Amin  |     1 |     5 | kabag      |
++-------+-------+-------+-------+------------+
+25 rows in set (0.000 sec)
+
+MariaDB [basanta]> select pegawai.id_pegawai no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where pegawai.idjabatan = jabatan.id_jabatan;
+ERROR 1054 (42S22): Unknown column 'pegawai.id_pegawai' in 'field list'
+MariaDB [basanta]> select pegawai.id_pegawai no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where
+    -> pegawai.idjab = jabatan.idjab;
+ERROR 1054 (42S22): Unknown column 'pegawai.id_pegawai' in 'field list'
+MariaDB [basanta]> select pegawai.idjab no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where
+    -> pegawai.idjab = jabatan.idjab;
++----+-------+------------+
+| no | nama  | jabatan    |
++----+-------+------------+
+|  1 | Rudi  | manager    |
+|  2 | Ani   | Pegawai    |
+|  1 | Bagus | manager    |
+|  3 | Anwar | Supervisor |
+|  1 | Amin  | manager    |
++----+-------+------------+
+5 rows in set (0.009 sec)
+
+MariaDB [basanta]> select.*,gaji*
+    -> from pegawai
+    -> join gaji on pegawai.idjab = gaji.idjab
+    -> where pegawai.idjab = 12345 and gaji.idjab =12345;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*,gaji*
+from pegawai
+join gaji on pegawai.idjab = gaji.idjab
+where pegawai.id...' at line 1
+MariaDB [basanta]> select pegawai.id_pegawai no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where
+    -> pegawai.idjab = jabatan.idjab;
+ERROR 1054 (42S22): Unknown column 'pegawai.id_pegawai' in 'field list'
+MariaDB [basanta]> selecr pagawai.idjab no,pegawai.nama,jabatan.jabatan frompegawai,jabatan where
+    -> pegawai.idjab = jabatan.idjab;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'selecr pagawai.idjab no,pegawai.nama,jabatan.jabatan frompegawai,jabatan wher...' at line 1
+MariaDB [basanta]> select pagawai.idjab no,pegawai.nama,jabatan.jabatan frompegawai,jabatan where
+    -> pegawai.idjab = jabatan.idjab;
+ERROR 1109 (42S02): Unknown table 'pagawai' in field list
+MariaDB [basanta]> select pegawai.id_pegawai no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where
+    -> pegawai.idjab = jabatan.idjab;
+ERROR 1054 (42S22): Unknown column 'pegawai.id_pegawai' in 'field list'
+MariaDB [basanta]> select pegawai.idjab no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where
+    -> pegawai.idjab = jabatan.idjab;
++----+-------+------------+
+| no | nama  | jabatan    |
++----+-------+------------+
+|  1 | Rudi  | manager    |
+|  2 | Ani   | Pegawai    |
+|  1 | Bagus | manager    |
+|  3 | Anwar | Supervisor |
+|  1 | Amin  | manager    |
++----+-------+------------+
+5 rows in set (0.000 sec)
+
+MariaDB [basanta]> select pegawai.idjab no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where
+    -> pegawai.idjab =jabatan.idjab and jabatan.jabatan like "pegawai";
++----+------+---------+
+| no | nama | jabatan |
++----+------+---------+
+|  2 | Ani  | Pegawai |
++----+------+---------+
+1 row in set (0.000 sec)
+
+MariaDB [basanta]> select pegawai.idjab no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where
+    -> pegawai.idjab =jabatan.idjab and jabatan.jabatan like "managaer";
+Empty set (0.000 sec)
+
+MariaDB [basanta]> pegawai.idjab =jabatan.idjab and jabatan.jabatan like "managaer";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'pegawai.idjab =jabatan.idjab and jabatan.jabatan like "managaer"' at line 1
+MariaDB [basanta]> select pegawai.idjab no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where
+    -> pegawai.idjab =jabatan.idjab and jabatan.jabatan like "manager";
++----+-------+---------+
+| no | nama  | jabatan |
++----+-------+---------+
+|  1 | Rudi  | manager |
+|  1 | Bagus | manager |
+|  1 | Amin  | manager |
++----+-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [basanta]> select pegawai.idjab no, pegawai.nama,jabatan.jabatan from pegawai,jabatan where
+    -> pegawai.idjab =jabatan.idjab and jabatan.jabatan like"supervisor";
++----+-------+------------+
+| no | nama  | jabatan    |
++----+-------+------------+
+|  3 | Anwar | Supervisor |
++----+-------+------------+
+1 row in set (0.000 sec)
+
+MariaDB [basanta]> select jabatan.jabatan,gaji.besaran from jabatan,gaji where
+    -> jabatan.idjab = gaji.idjab;
++------------+----------+
+| jabatan    | besaran  |
++------------+----------+
+| manager    | 20000000 |
+| Pegawai    | 10000000 |
+| Supervisor | 15000000 |
++------------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [basanta]> select jabatan.jabatan,gaji.besaran nominal from jabatan,gaji where
+    -> jabatan.idjab = gaji.idjab;
++------------+----------+
+| jabatan    | nominal  |
++------------+----------+
+| manager    | 20000000 |
+| Pegawai    | 10000000 |
+| Supervisor | 15000000 |
++------------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [basanta]> select pegawai.nama, jabatan.jabatan, gaji.besaran AS nom
+inal From pegawai join jabatan on pegawai.idjab = jabatan.idjab join gaji pn
+ pegawai.idpeg = gaji.idpeg;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'pegawai.idpeg = gaji.idpeg' at line 1
+MariaDB [basanta]> select jabatan.jabatan,gaji.besaran nominal from jabatan,gaji where
+    -> jabatan.idjab = gaji.idjab;
++------------+----------+
+| jabatan    | nominal  |
++------------+----------+
+| manager    | 20000000 |
+| Pegawai    | 10000000 |
+| Supervisor | 15000000 |
++------------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [basanta]>  select besaran from gaji;
++----------+
+| besaran  |
++----------+
+| 20000000 |
+| 10000000 |
+| 15000000 |
++----------+
+3 rows in set (0.000 sec)
+
+MariaDB [basanta]>  select SUM (besaran) total_gaji from gaji;
+ERROR 1630 (42000): FUNCTION basanta.SUM does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+MariaDB [basanta]> select sum (besaran) total_gaji from gaji;
+ERROR 1630 (42000): FUNCTION basanta.sum does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+MariaDB [basanta]> select sum (besaran) Total_Gaji from gaji;
+ERROR 1630 (42000): FUNCTION basanta.sum does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+MariaDB [basanta]> select sum(besaran) Total_Gaji from gaji;
++------------+
+| Total_Gaji |
++------------+
+|   45000000 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [basanta]>
